@@ -1,4 +1,4 @@
 variable "availability_zone" {
-  type    = String
+  type    = string
   default = "eu-north-1"
 }
