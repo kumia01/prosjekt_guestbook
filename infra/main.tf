@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.availability_zone
+  region = "eu-north-1"
 }
 
 
