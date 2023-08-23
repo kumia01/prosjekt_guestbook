@@ -38,6 +38,24 @@ resource "aws_iam_role_policy_attachment" "eks_node_policy" {
   role       = aws_iam_role.eks_node_role.name
 }
 
-resource "aws_iam_instance_profile" "eks_worker_instance_profile" {
-  role = aws_iam_role.eks_node_role.name
+resource "aws_iam_role_policy_attachment" "eks_worker_cni_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  role       = aws_iam_role.eks_worker.name
 }
+
+resource "aws_iam_role_policy_attachment" "eks_worker_ecr_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.eks_worker.name
+}
+
+# Attach our custom policy
+resource "aws_iam_role_policy_attachment" "eks_worker_custom_policy" {
+  policy_arn = aws_iam_policy.eks_worker.arn
+  role       = aws_iam_role.eks_worker.name
+}
+
+resource "aws_iam_instance_profile" "eks_worker" {
+    name = "eksworker-profile"
+    role = aws_iam_role.eks_node_role.name
+}
+

@@ -28,5 +28,9 @@ resource "aws_eks_node_group" "worker_nodes" {
     instance_types = ["m5.large"]
     ami_type = "AL2_x86_64"
 
-    depends_on = [aws_iam_role_policy_attachment.eks_node_policy]
+    depends_on = [
+        aws_iam_role_policy_attachment.eks_node_policy,
+        aws_iam_role_policy_attachment.eks_worker_cni_policy,
+        aws.iam_role_policy_attachment.eks_worker_ecr_policy
+    ]
 }
