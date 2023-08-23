@@ -13,25 +13,13 @@ resource "aws_eks_cluster" "application_cluster" {
     depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
 }
 
-resource "aws_launch_configuration" "eks_worker" {
-    name_prefix = "eks-worker"
-    instance_type = "t2.micro"
-    iam_instance_profile = aws_iam_instance_profile.eks_worker_instance_profile.name
-    image_id = "ami-07bfff1c04cd9d7bd"
-
-}
-
 resource "aws_launch_template" "eks_worker" {
+
   name_prefix   = "worker"
   image_id      = "ami-07bfff1c04cd9d7bd" # Your AMI ID
   instance_type = "m5.large"
 
-  user_data = base64encode(<<-EOT 
-                #!/bin/bash
-                /etc/eks/bootstrap.sh ${aws_eks_cluster.application_cluster.name}
-                EOT
-                )
-  }
+}
 
 resource "aws_autoscaling_group" "eks_worker_group"{
     min_size = 1
@@ -49,4 +37,22 @@ resource "aws_autoscaling_group" "eks_worker_group"{
         value = "eks-worker-node"
         propagate_at_launch = true
     }
+}
+
+resource "aws_eks_node_group" "worker_nodes" {
+    cluster_name = aws_eks_cluster.applications_cluster.name
+    node_group_name = "my-worker-group"
+    node_role_arn = aws_iam_role.eks_node_role.name
+    subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
+
+    scaling_config {
+        desired_size = 1
+        max_size = 3
+        min_size = 1
+    }
+
+    intance_type = "m5.large"
+    ami_type = "ami-02f424f49b600a4ed"
+
+    depends_on = [aws_iam_role_policy_attachment.eks_node_policy]
 }
