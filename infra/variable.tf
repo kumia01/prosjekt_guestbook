@@ -1,4 +1,5 @@
-variable "availability_zone" {
-  type    = string
-  default = "eu-north-1a"
+
+variable "key_name" {
+    description = "The key name to use for the instance"
+    default = "application-key"
 }

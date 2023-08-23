@@ -1,23 +1,21 @@
-provider "aws" {
-  region = "eu-north-1"
+
+module "eks" {
+    source = "terraform-aws-modules/eks/aws"
+    cluster_name = "my_cluster"
+    cluster_version = "1.21"
+    subnets = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
+
+    node_groups = {
+        eks_nodes= {
+            desired_capacity = 1
+            max_capacity = 2
+            min_capacity = 1
+
+            instance_type = "t2.micro"
+            key_name = var.key_name
+        }
+    }
 }
 
-
-resource "aws_vpc" "application_vpc" {
-  cidr_block = "10.0.0.0/16"
-
-  tags = {
-    Name = "App_vpc"
-  }
-}
-
-resource "aws_subnet" "priv_sub" {
-  vpc_id            = aws_vpc.application_vpc.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = var.availability_zone
-  tags = {
-    Name = "Application_subnet_priv"
-  }
-}
 
 
