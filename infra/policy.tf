@@ -18,6 +18,24 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
   role       = aws_iam_role.eks_cluster_role.name
 }
 
+resource "aws_iam_policy" "eks_worker" {
+  name        = "EKSWorkerPolicy"
+  description = "My policy that grants necessary permissions for EKS Worker Nodes"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "eks:DescribeCluster",
+        ],
+        Effect   = "Allow",
+        Resource = "*"
+      },
+      # Add any other necessary permissions
+    ]
+  })
+}
 
 resource "aws_iam_role" "eks_worker" {
   name = "eks_node_role"

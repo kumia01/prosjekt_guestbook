@@ -16,7 +16,7 @@ resource "aws_eks_cluster" "application_cluster" {
 resource "aws_eks_node_group" "worker_nodes" {
     cluster_name = aws_eks_cluster.application_cluster.name
     node_group_name = "my-worker-group"
-    node_role_arn = aws_iam_role.eks_node_role.name
+    node_role_arn = aws_iam_role.eks_worker.name
     subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
 
     scaling_config {
@@ -31,7 +31,7 @@ resource "aws_eks_node_group" "worker_nodes" {
     depends_on = [
         aws_iam_role_policy_attachment.eks_worker_eks_policy,
         aws_iam_role_policy_attachment.eks_worker_cni_policy,
-        aws.iam_role_policy_attachment.eks_worker_ecr_policy,
+        aws_iam_role_policy_attachment.eks_worker_ecr_policy,
         aaws_iam_role_policy_attachment.eks_worker_custom_policy
     ]
 }
