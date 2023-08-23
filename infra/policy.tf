@@ -19,7 +19,7 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
 }
 
 resource "aws_iam_policy" "eks_worker" {
-  name        = "EKSWorkerPolicy"
+  name        = "eks_worker_role"
   description = "My policy that grants necessary permissions for EKS Worker Nodes"
 
   policy = jsonencode({
