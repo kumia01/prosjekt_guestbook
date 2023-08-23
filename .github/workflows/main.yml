@@ -110,3 +110,4 @@ jobs:
       - name: Terraform Destroy
         if: github.event_name == 'pull_request' && github.event.action == 'closed'
         run: terraform destroy -auto-approve -input=false  
+        
