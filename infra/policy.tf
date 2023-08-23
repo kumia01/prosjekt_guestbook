@@ -38,7 +38,7 @@ resource "aws_iam_policy" "eks_worker" {
 }
 
 resource "aws_iam_role" "eks_worker" {
-  name = "eks_node_role"
+  name = "EKSWorkerPolicy"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
