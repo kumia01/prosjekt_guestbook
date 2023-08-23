@@ -25,7 +25,7 @@ resource "aws_eks_node_group" "worker_nodes" {
         min_size = 1
     }
 
-    intance_type = "m5.large"
+    instance_type = "m5.large"
     ami_type = "ami-02f424f49b600a4ed"
 
     depends_on = [aws_iam_role_policy_attachment.eks_node_policy]
