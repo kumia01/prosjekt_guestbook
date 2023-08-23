@@ -10,7 +10,7 @@ resource "aws_eks_cluster" "application_cluster" {
     security_group_ids = [aws_security_group.eks_security_group.id]
   }
 
-    depends_on = [aws_iam_role_role_policy_attachemnt.eks_cluster_policy]
+    depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
 }
 
 resource "aws_launch_configuration" "eks_worker" {
