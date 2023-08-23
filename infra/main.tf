@@ -24,7 +24,7 @@ resource "aws_launch_configuration" "eks_worker" {
 resource "aws_launch_template" "eks_worker" {
   name_prefix   = "worker"
   image_id      = "ami-07bfff1c04cd9d7bd" # Your AMI ID
-  instance_type = "t2.micro"
+  instance_type = "m5.large"
   }
 
 resource "aws_autoscaling_group" "eks_worker_group"{
