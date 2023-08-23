@@ -74,6 +74,6 @@ resource "aws_iam_role_policy_attachment" "eks_worker_custom_policy" {
 
 resource "aws_iam_instance_profile" "eks_worker" {
     name = "eksworker-profile"
-    role = aws_iam_role.eks_node_role.name
+    role = aws_iam_role.eks_worker.name
 }
 
