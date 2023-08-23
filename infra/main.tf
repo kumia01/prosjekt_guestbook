@@ -14,7 +14,7 @@ resource "aws_eks_cluster" "application_cluster" {
 }
 
 resource "aws_eks_node_group" "worker_nodes" {
-    cluster_name = aws_eks_cluster.applications_cluster.name
+    cluster_name = aws_eks_cluster.application_cluster.name
     node_group_name = "my-worker-group"
     node_role_arn = aws_iam_role.eks_node_role.name
     subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
