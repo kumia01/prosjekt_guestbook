@@ -21,13 +21,23 @@ resource "aws_launch_configuration" "eks_worker" {
 
 }
 
+resource "aws_launch_template" "eks_worker" {
+  name_prefix   = "worker"
+  image_id      = "ami-07bfff1c04cd9d7bd" # Your AMI ID
+  instance_type = "t2.micro"
+  }
+
 resource "aws_autoscaling_group" "eks_worker_group"{
-    launch_configuration = aws_launch_configuration.eks_worker.name
     min_size = 1
     max_size = 2
     desired_capacity = 2
     vpc_zone_identifier = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
     
+    launch_template {
+      id = aws_launch_template.eks_worker.id
+      version = "$Latest"
+    }
+
     tag {
         key = "Name"
         value = "eks-worker-node"
