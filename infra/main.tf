@@ -10,7 +10,7 @@ module "eks" {
     subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
 
     eks_managed_node_group_defaults = {
-        instance_types = ["t2.micro"]
+        instance_types = ["t3.micro"]
     }
 
     eks_managed_node_groups = {
@@ -19,7 +19,7 @@ module "eks" {
         max_size = 2
         desired_size = 1
         
-        instance_type = ["t2.micro"]
+        instance_type = ["t3.micro"]
     }
     }
 }
