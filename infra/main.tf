@@ -17,7 +17,7 @@ resource "aws_launch_configuration" "eks_worker" {
     name_prefix = "eks-worker"
     instance_type = "t2.micro"
     iam_instance_profile = aws_iam_instance_profile.eks_worker_instance_profile.name
-    image_id = "ami-1234567890abcdef0"
+    image_id = "ami-07bfff1c04cd9d7bd"
 
 }
 
