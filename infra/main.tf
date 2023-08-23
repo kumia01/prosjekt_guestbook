@@ -9,14 +9,17 @@ module "eks" {
     vpc_id = aws_vpc.application_vpc.id
     subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
 
-    node_groups = {
-        eks_nodes = {
-            desired_capacity = 1
-            max_capacity = 2
-            min_capacity = 1
+    eks_managed_node_gorups_defaults = {
+        instance_types = ["t2.micro"]
+    }
 
-            instance_type = "t2.micro"
-            key_name = var.key_name
+    eks_managed_node_groups = {
+        worker_node = {
+            min_size = 1
+            max_size = 2
+            desired_size = 1
+
+            instance_type = ["t2.micro"]
         }
     }
 }
