@@ -47,5 +47,5 @@ resource "aws_security_group_rule" "ingress_rule" {
   from_port = 0
   to_port = 65535
   protocol = "tcp"
-  cidr_blocks = [aws_vpc.my_vpc.cidr_block]
+  cidr_blocks = [aws_vpc.application_vpc.cidr_block]
 }

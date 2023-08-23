@@ -3,16 +3,14 @@
 
 resource "aws_eks_cluster" "application_cluster" {
   name = "app_cluster"
-  role_arn = "aws_iam_role.eks_cluster_role.arn"
+  role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
     subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
     security_group_ids = [aws_security_group.eks_security_group.id]
   }
 
-    depends_on = [ 
-        aws_iam_role_role_policy_attachemnt.eks_cluster_policy,
-     ]
+    depends_on = [aws_iam_role_role_policy_attachemnt.eks_cluster_policy]
 }
 
 resource "aws_launch_configuration" "eks_worker" {
@@ -21,10 +19,6 @@ resource "aws_launch_configuration" "eks_worker" {
     iam_instance_profile = aws_iam_instance_profile.eks_worker_instance_profile.name
     image_id = "ami-1234567890abcdef0"
 
-    user_data = <<-EOF
-                #!/bin/bash
-                /etc/eks/bootstrap.sh ${aws_eks_cluster.my_cluster.name}
-                EOF
 }
 
 resource "aws_autoscaling_group" "eks_worker_group"{
