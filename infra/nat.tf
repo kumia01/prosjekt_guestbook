@@ -22,5 +22,5 @@ resource "aws_nat_gateway" "nat"{
         Name = "nat"
     }
 
-    depends_in = [aws_internet_gateway.igw]
+    depends_on = [aws_internet_gateway.igw]
 }
