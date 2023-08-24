@@ -70,3 +70,4 @@ resource "aws_route_table_association" "public-eu-north-1a" {
 resource "aws_route_table_association" "public-eu-north-1b" {
   subnet_id      = aws_subnet.public-eu-north-1b.id
   route_table_id = aws_route_table.public.id
+}
