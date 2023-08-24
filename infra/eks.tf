@@ -24,7 +24,12 @@ resource "aws_eks_cluster" "application_cluster" {
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
-    subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
+    subnet_ids = [
+      aws_subnet.priv_sub_a.id,
+      aws_subnet.priv_sub_b.id,
+      aws_subnet.public-eu-north-1a.id,
+      aws_subnet.public-eu-north-1b.id
+      ]
     security_group_ids = [aws_security_group.eks_security_group.id]
   }
 

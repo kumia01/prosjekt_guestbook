@@ -31,6 +31,28 @@ resource "aws_subnet" "priv_sub_b"{
     }
 }
 
+resource "aws_subnet" "public-eu-north-1a" {
+  vpc_id = aws_vpc.application_vpc.id
+  cidr_block = "10.0.3.0/24"
+  availability_zone = "eu-north-1a"
+  tags = {
+        Name = "Application_subnet_pub-a"
+        "kubernetes.oi/role/internal-elb" = "1"
+        "kubernetes.oi/cluster/app_cluster" = "owned"
+    }
+}
+
+resource "aws_subnet" "public-eu-north-1b" {
+  vpc_id = aws_vpc.application_vpc.id
+  cidr_block = "10.0.4.0/24"
+  availability_zone = "eu-north-1b"
+  tags = {
+        Name = "Application_subnet_pub-b"
+        "kubernetes.oi/role/internal-elb" = "1"
+        "kubernetes.oi/cluster/app_cluster" = "owned"
+    }
+}
+
 resource "aws_security_group" "eks_security_group" {
     vpc_id = aws_vpc.application_vpc.id
     name   = "eks_security_group"
