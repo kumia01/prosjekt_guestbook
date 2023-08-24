@@ -1,6 +1,6 @@
 
 resource "aws_eip" "nat" {
-    vpc = true
+    domain = vpc
 }
 
 resource "aws_nat_gateway" "eks_gateway" {
