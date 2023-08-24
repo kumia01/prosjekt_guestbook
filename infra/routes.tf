@@ -7,7 +7,18 @@ resource "aws_route_table" "private" {
         {
         cidr_block                 = "0.0.0.0/0"
         nat_gateway_id             = aws_nat_gateway.nat.id
-
+        carrier_gateway_id         = null
+        destination_prefix_list_id = null
+        egress_only_gateway_id     = null
+        gateway_id                 = null
+        instance_id                = null
+        ipv6_cidr_block            = null
+        local_gateway_id           = null
+        network_interface_id       = null
+        transit_gateway_id         = null
+        vpc_endpoint_id            = null
+        vpc_peering_connection_id  = null
+        core_network_arn           = null
         },
     ]
 
@@ -23,6 +34,18 @@ resource "aws_route_table" "public" {
     {
     cidr_block                 = "0.0.0.0/0"
     gateway_id                 = aws_internet_gateway.igw.id
+    nat_gateway_id             = null
+    carrier_gateway_id         = null
+    destination_prefix_list_id = null
+    egress_only_gateway_id     = null
+    instance_id                = null
+    ipv6_cidr_block            = null
+    local_gateway_id           = null
+    network_interface_id       = null
+    transit_gateway_id         = null
+    vpc_endpoint_id            = null
+    vpc_peering_connection_id  = null
+    core_network_arn           = null
     },
   ]
 
