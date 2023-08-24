@@ -38,7 +38,9 @@ resource "aws_eks_node_group" "worker_nodes" {
   node_role_arn = aws_iam_role.eks_worker.arn
   subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
 
-  source_security_group_id = [aws_security_group.eks_worker_node_sg.id]
+  remote_access {
+     source_security_group_id = [aws_security_group.eks_worker_node_sg.id]
+  }
 
   capacity_type = "ON_DEMAND"
   instance_types = ["t3.medium"]
