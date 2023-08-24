@@ -39,6 +39,7 @@ resource "aws_eks_node_group" "worker_nodes" {
   subnet_ids = [aws_subnet.priv_sub_a.id, aws_subnet.priv_sub_b.id]
 
   remote_access {
+    ec2_ssh_key = "application_key"
     source_security_group_ids = [aws_security_group.eks_worker_node_sg.id]
   }
 
