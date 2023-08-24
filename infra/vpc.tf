@@ -15,8 +15,8 @@ resource "aws_subnet" "priv_sub_a" {
   availability_zone = "eu-north-1a"
   tags = {
     Name = "Application_subnet_priv-a"
-    "kubernetes.oi/role/internal-elb" = "1"
-    "kubernetes.oi/cluster/app_cluster" = "owned"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/app_cluster" = "owned"
   }
 }
 
@@ -26,8 +26,8 @@ resource "aws_subnet" "priv_sub_b"{
     availability_zone = "eu-north-1b"
     tags = {
         Name = "Application_subnet_priv-b"
-        "kubernetes.oi/role/internal-elb" = "1"
-        "kubernetes.oi/cluster/app_cluster" = "owned"
+        "kubernetes.io/role/internal-elb" = "1"
+        "kubernetes.io/cluster/app_cluster" = "owned"
     }
 }
 
@@ -38,8 +38,8 @@ resource "aws_subnet" "public-eu-north-1a" {
   map_public_ip_on_launch = true
   tags = {
         Name = "Application_subnet_pub-a"
-        "kubernetes.oi/role/internal-elb" = "1"
-        "kubernetes.oi/cluster/app_cluster" = "owned"
+        "kubernetes.io/role/internal-elb" = "1"
+        "kubernetes.io/cluster/app_cluster" = "owned"
     }
 }
 
@@ -50,8 +50,8 @@ resource "aws_subnet" "public-eu-north-1b" {
   map_public_ip_on_launch = true
   tags = {
         Name = "Application_subnet_pub-b"
-        "kubernetes.oi/role/internal-elb" = "1"
-        "kubernetes.oi/cluster/app_cluster" = "owned"
+        "kubernetes.io/role/internal-elb" = "1"
+        "kubernetes.io/cluster/app_cluster" = "owned"
     }
 }
 
