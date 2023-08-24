@@ -71,7 +71,7 @@ resource "aws_security_group_rule" "worker_node_all_outbound" {
 }
 
 resource "aws_security_group_rule" "worker_nodes_inbound_nodeport" {
-  security_group_id = aws_security_group.eks_worker_nodes_sg.id
+  security_group_id = aws_security_group.eks_worker_node_sg.id
   type              = "ingress"
   protocol          = "tcp"
   from_port         = 30000
@@ -80,10 +80,10 @@ resource "aws_security_group_rule" "worker_nodes_inbound_nodeport" {
 }
 
 resource "aws_security_group_rule" "worker_nodes_inbound_from_self" {
-  security_group_id = aws_security_group.eks_worker_nodes_sg.id
+  security_group_id = aws_security_group.eks_worker_node_sg.id
   type              = "ingress"
   protocol          = "-1"
   from_port         = 0
   to_port           = 0
-  source_security_group_id = aws_security_group.eks_worker_nodes_sg.id
+  source_security_group_id = aws_security_group.eks_worker_node_sg.id
 }
