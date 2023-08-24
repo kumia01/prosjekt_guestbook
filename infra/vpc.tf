@@ -15,6 +15,8 @@ resource "aws_subnet" "priv_sub_a" {
   availability_zone = "eu-north-1a"
   tags = {
     Name = "Application_subnet_priv-a"
+    "kubernetes.oi/role/internal-elb" = "1"
+    "kubernetes.oi/cluster/app_cluster" = "owned"
   }
 }
 
@@ -24,6 +26,8 @@ resource "aws_subnet" "priv_sub_b"{
     availability_zone = "eu-north-1b"
     tags = {
         Name = "Application_subnet_priv-b"
+        "kubernetes.oi/role/internal-elb" = "1"
+        "kubernetes.oi/cluster/app_cluster" = "owned"
     }
 }
 
